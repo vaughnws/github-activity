@@ -28,7 +28,7 @@ var GitHubActivity = (function() {
     getMessageFor: function(data) {
       var p = data.payload;
       data.repoLink = methods.renderGitHubLink(data.repo.name);
-      data.userGravatar = Mustache.render('<div class="gha-gravatar-user"><img src="{{url}}" class="gha-gravatar-small" alt="user image" ></div>', { url: data.actor.avatar_url });
+      data.userGravatar = Mustache.render('<div class="gha-gravatar-user"><img src="{{url}}" class="gha-gravatar-small" alt="user image"></div>', { url: data.actor.avatar_url });
 
       // Get the branch name if it exists.
       if (p.ref) {
@@ -58,7 +58,7 @@ var GitHubActivity = (function() {
           }
           if (i < 2) {
             d.shaLink = methods.renderGitHubLink(data.repo.name + '/commit/' + d.sha, d.sha.substring(0, 6), 'gha-sha');
-            d.committerGravatar = Mustache.render('<img class="gha-gravatar-commit" src="https://gravatar.com/avatar/{{hash}}" width="16" alt="commit image" />', { hash: md5(d.author.email.trim().toLowerCase()) });
+            d.committerGravatar = Mustache.render('<img class="gha-gravatar-commit" src="https://gravatar.com/avatar/{{hash}}" alt="commit image" width="16">', { hash: md5(d.author.email.trim().toLowerCase()) });
           } else {
             // Delete the rest of the commits after the first 2, and then break out of the each loop.
             p.commits.splice(2, p.size);
@@ -320,7 +320,7 @@ function millisecondsToStr(milliseconds) {
 // an 's' to be added for pluralization.
 function pluralize(word, number) {
   // Yeah I know, this sucks.
-  if (number !== 1) return word + 's';
+  if (number !== 1) return word + 's'; 
   return word;
 }
 
