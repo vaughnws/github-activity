@@ -169,7 +169,11 @@ var GitHubActivity = (function() {
         data.withoutName = ' without-name';
       }
       data.userLink = methods.renderLink(data.html_url, data.login);
+<<<<<<< Updated upstream
       data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '">');
+=======
+      data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '\" alt="avatar image" >');
+>>>>>>> Stashed changes
       return Mustache.render(templates.UserHeader, data);
     },
     getActivityHTML: function(data, limit) {
