@@ -169,19 +169,7 @@ var GitHubActivity = (function() {
         data.withoutName = ' without-name';
       }
       data.userLink = methods.renderLink(data.html_url, data.login);
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '">');
-=======
-      data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '\" alt="avatar image" >');
->>>>>>> Stashed changes
-=======
-      data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '\" alt="avatar image" >');
->>>>>>> Stashed changes
-=======
       data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '" alt="avatar image" >');
->>>>>>> 49e120f6eed707fcd96588e633acb314d28ff8b2
       return Mustache.render(templates.UserHeader, data);
     },
     getActivityHTML: function(data, limit) {
