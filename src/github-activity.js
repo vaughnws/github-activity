@@ -170,7 +170,11 @@ var GitHubActivity = (function() {
       }
       data.userLink = methods.renderLink(data.html_url, data.login);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '">');
+=======
+      data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '\" alt="avatar image" >');
+>>>>>>> Stashed changes
 =======
       data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '\" alt="avatar image" >');
 >>>>>>> Stashed changes
