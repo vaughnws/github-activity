@@ -1,3 +1,4 @@
+
 /*!
  * GitHub Activity Stream - v0.1.4 - 10/7/2015
  * https://github.com/caseyscarborough/github-activity
@@ -28,7 +29,10 @@ var GitHubActivity = (function() {
     getMessageFor: function(data) {
       var p = data.payload;
       data.repoLink = methods.renderGitHubLink(data.repo.name);
-      data.userGravatar = Mustache.render('<div class="gha-gravatar-user"><img src="{{url}}" class="gha-gravatar-small" alt="user image"></div>', { url: data.actor.avatar_url });
+      data.userGravatar = Mustache.render('<div class="gha-gravatar-user"><img src="{{url}}" class="gha-gravatar-small" alt="{{username}}\'s avatar" title="{{username}}"></div>', { 
+        url: data.actor.avatar_url,
+        username: data.actor.login 
+      });
 
       // Get the branch name if it exists.
       if (p.ref) {
@@ -58,7 +62,11 @@ var GitHubActivity = (function() {
           }
           if (i < 2) {
             d.shaLink = methods.renderGitHubLink(data.repo.name + '/commit/' + d.sha, d.sha.substring(0, 6), 'gha-sha');
-            d.committerGravatar = Mustache.render('<img class="gha-gravatar-commit" src="https://gravatar.com/avatar/{{hash}}" alt="commit image" width="16">', { hash: md5(d.author.email.trim().toLowerCase()) });
+            // Add alt text to committer gravatar
+            d.committerGravatar = Mustache.render('<img class="gha-gravatar-commit" src="https://gravatar.com/avatar/{{hash}}" alt="{{author}}\'s avatar" title="{{author}}" width="16">', { 
+              hash: md5(d.author.email.trim().toLowerCase()),
+              author: d.author.name || d.author.email 
+            });
           } else {
             // Delete the rest of the commits after the first 2, and then break out of the each loop.
             p.commits.splice(2, p.size);
@@ -169,7 +177,8 @@ var GitHubActivity = (function() {
         data.withoutName = ' without-name';
       }
       data.userLink = methods.renderLink(data.html_url, data.login);
-      data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '" alt="avatar image" >');
+      // Add alt text to user avatar
+      data.gravatarLink = methods.renderLink(data.html_url, '<img src="' + data.avatar_url + '" alt="' + data.login + '\'s avatar" title="' + data.login + '" >');
       return Mustache.render(templates.UserHeader, data);
     },
     getActivityHTML: function(data, limit) {
